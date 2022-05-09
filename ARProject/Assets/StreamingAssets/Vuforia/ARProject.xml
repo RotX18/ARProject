@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="Roof" size="1.000000 0.750172" />
+    <ImageTarget name="OutsideLift1" size="1.000000 1.333459" />
+    <ImageTarget name="SurfingCats" size="1.000000 1.333454" />
+    <ImageTarget name="OutsideLift2" size="1.000000 0.942152" />
+  </Tracking>
+</QCARConfig>
