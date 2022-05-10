@@ -11,13 +11,16 @@ public class RabbitBehavior : MonoBehaviour
     private GameObject targetPos;
 
     private void Start() {
+        //at Start, select a random waypoint to move toward
         targetPos = waypoints[Random.Range(0, waypoints.Length)];
     }
 
     private void Update() {
+        //changing the position to the target position using Vector3.MoveTowards();
         transform.position = Vector3.MoveTowards(transform.position, targetPos.transform.position, 0.005f);
 
         if(transform.position == targetPos.transform.position) {
+            //once rabbit has reached the target waypoint, change the target position so that it can move toward the new target
             SetNewTarget();
         }
     }
