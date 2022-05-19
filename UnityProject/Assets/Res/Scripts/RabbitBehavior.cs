@@ -51,7 +51,7 @@ public class RabbitBehavior : MonoBehaviour
 
         if(_targetPos.transform.position == newTarget.transform.position) {
             //rerolling if the new position is the same as the current position
-            _targetPos = waypoints[Random.Range(0, waypoints.Length)];
+            _targetPos = waypoints[Random.Range(0, waypoints.Length - 1)];
         }
         else {
             _targetPos = newTarget;
