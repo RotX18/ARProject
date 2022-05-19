@@ -5,35 +5,71 @@ using UnityEngine;
 public class RabbitBehavior : MonoBehaviour
 {
     //PUBLIC VARS
+    public Animator anim;
     public GameObject[] waypoints;
 
     //PRIVATE VARS
-    private GameObject targetPos;
+    //floats
+    private float _moveSpeed = 0.003f;
+    private float _idleChance = 1;
+
+    //bools
+    private bool _idleState = false;
+    private bool _executeCoroutines = true;
+    private bool _move = true;
+
+    //GameObjects
+    private GameObject _targetPos;
 
     private void Start() {
         //at Start, select a random waypoint to move toward
-        targetPos = waypoints[Random.Range(0, waypoints.Length)];
+        _targetPos = waypoints[Random.Range(0, waypoints.Length)];
     }
 
     private void Update() {
         //changing the position to the target position using Vector3.MoveTowards();
-        transform.position = Vector3.MoveTowards(transform.position, targetPos.transform.position, 0.005f);
+        if(_move){
+            transform.position = Vector3.MoveTowards(transform.position, _targetPos.transform.position, _moveSpeed);
+            transform.LookAt(_targetPos.transform);
+        }
 
-        if(transform.position == targetPos.transform.position) {
-            //once rabbit has reached the target waypoint, change the target position so that it can move toward the new target
-            SetNewTarget();
+        if(transform.position == _targetPos.transform.position) {
+            //once rabbit has reached the target waypoint check whether it should stay in place for a few seconds
+            if(Random.Range(1, _idleChance) == 1 && _executeCoroutines == true){
+                //there is a 1 in _idleChance that the rabbit will stay idle for awhile
+                _move = false;
+                _executeCoroutines = false;
+                StartCoroutine(goIdle());
+            }
+            else{
+                SetNewTarget();
+            }
         }
     }
 
     private void SetNewTarget() {
         GameObject newTarget = waypoints[Random.Range(0, waypoints.Length)];
 
-        if(targetPos.transform.position == newTarget.transform.position) {
+        if(_targetPos.transform.position == newTarget.transform.position) {
             //rerolling if the new position is the same as the current position
-            targetPos = waypoints[Random.Range(0, waypoints.Length)];
+            _targetPos = waypoints[Random.Range(0, waypoints.Length)];
         }
         else {
-            targetPos = newTarget;
+            _targetPos = newTarget;
         }
+    }
+
+    private IEnumerator goIdle(){
+        //coroutine to set the animator to idle state for a random amt of seconds before reverting
+        anim.SetBool("IdleState", true);
+        yield return new WaitForSeconds(Random.Range(3, 7));
+        anim.SetBool("IdleState", false);
+
+        //allowing this coroutine to be executed again
+        _executeCoroutines = true;
+
+        //setting new target and allowing the rabbit to move
+        SetNewTarget();
+        _move = true;
     }
 }
