@@ -14,7 +14,6 @@ public class RabbitBehavior : MonoBehaviour
     private float _idleChance = 1;
 
     //bools
-    private bool _idleState = false;
     private bool _executeCoroutines = true;
     private bool _move = true;
 
