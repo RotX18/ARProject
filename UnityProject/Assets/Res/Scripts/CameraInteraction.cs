@@ -29,7 +29,7 @@ public class CameraInteraction : MonoBehaviour
         }
     }
 
-    public void BtnPetOnClick(){
+    public void OnClick_BtnPet(){
         //playing the hearts particle and debug logging the coin
         _rabbitParticles.GetComponent<ParticleSystem>().Play();
         Debug.Log("You have earned 1 coin!");
