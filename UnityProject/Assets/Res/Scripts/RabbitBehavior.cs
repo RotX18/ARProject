@@ -51,7 +51,7 @@ public class RabbitBehavior : MonoBehaviour
 
         if(_targetPos.transform.position == newTarget.transform.position) {
             //rerolling if the new position is the same as the current position
-            _targetPos = waypoints[Random.Range(0, waypoints.Length - 1)];
+            _targetPos = waypoints[Random.Range(0, waypoints.Length)];
         }
         else {
             _targetPos = newTarget;
@@ -61,7 +61,7 @@ public class RabbitBehavior : MonoBehaviour
     private IEnumerator goIdle(){
         //coroutine to set the animator to idle state for a random amt of seconds before reverting
         anim.SetBool("IdleState", true);
-        yield return new WaitForSeconds(Random.Range(3, 7));
+        yield return new WaitForSeconds(Random.Range(1, 5));
         anim.SetBool("IdleState", false);
 
         //allowing this coroutine to be executed again
