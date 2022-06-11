@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
             rainEffect.GetComponent<RainScript>().RainIntensity = 1;
 
             //reducing the light intensity to give the impression of rainy day
-            directionalLight.intensity = 0.45f;
+            directionalLight.intensity = 1.5f;
             btnRainToggle.GetComponentInChildren<TextMeshProUGUI>().text = "Rainy";
         }
         else{
@@ -39,10 +39,9 @@ public class GameManager : MonoBehaviour
             rainEffect.GetComponent<RainScript>().RainIntensity = 0;
 
             //increasing the light intensity to give the impression of sunny day
-            directionalLight.intensity = 1.5f;
+            directionalLight.intensity = 2.5f;
             btnRainToggle.GetComponentInChildren<TextMeshProUGUI>().text = "Sunny";
         }
-        Debug.Log(directionalLight.intensity);
     }
 
     public void OnClick_BtnRainToggle(){
