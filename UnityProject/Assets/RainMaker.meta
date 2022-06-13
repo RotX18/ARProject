@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:UnityProject/Assets/RainMaker.meta
 guid: cc315df75ed3f664d9beedadf92e35ce
+========
+guid: 6a0b5c39527f8734d8fd2c12f86fba26
+>>>>>>>> main:UnityProject/Assets/Plugins.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
