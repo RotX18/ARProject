@@ -11,7 +11,6 @@ public class RabbitBehavior : MonoBehaviour
     //PRIVATE VARS
     //floats
     private float _moveSpeed = 0.003f;
-    private float _idleChance = 1;
 
     //bools
     private bool _executeCoroutines = true;
@@ -34,8 +33,7 @@ public class RabbitBehavior : MonoBehaviour
 
         if(transform.position == _targetPos.transform.position) {
             //once rabbit has reached the target waypoint check whether it should stay in place for a few seconds
-            if(Random.Range(1, _idleChance) == 1 && _executeCoroutines == true){
-                //there is a 1 in _idleChance that the rabbit will stay idle for awhile
+            if(_executeCoroutines == true){
                 _move = false;
                 _executeCoroutines = false;
                 StartCoroutine(goIdle());
@@ -61,7 +59,7 @@ public class RabbitBehavior : MonoBehaviour
     private IEnumerator goIdle(){
         //coroutine to set the animator to idle state for a random amt of seconds before reverting
         anim.SetBool("IdleState", true);
-        yield return new WaitForSeconds(Random.Range(1, 5));
+        yield return new WaitForSeconds(Random.Range(3, 7));
         anim.SetBool("IdleState", false);
 
         //allowing this coroutine to be executed again
