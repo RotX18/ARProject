@@ -13,12 +13,14 @@ public class CameraInteraction : MonoBehaviour
     private GameObject _rabbitParticles;
 
     private void FixedUpdate() {
-        Debug.DrawRay(transform.position, Vector3.forward, Color.red);
-        if(Physics.Raycast(transform.position, Vector3.forward, out _hit)){
+        Debug.DrawLine(transform.position, Vector3.forward * 10000f, Color.red);
+        if(Physics.Raycast(transform.position, Vector3.forward, out _hit, 10000f)){
             //raycasting from the camera to 3f units infront
+            Debug.Log("AAAA");
             if(_hit.transform.CompareTag("Rabbit")){
                 //if the raycast obj has rabbit as its tag
                 btnPet.gameObject.SetActive(true);
+                Debug.Log("BBBB");
 
                 //getting the game object responsible for the particles
                 _rabbitParticles = _hit.transform.GetChild(3).gameObject;
