@@ -11,6 +11,12 @@ public class GameManager : MonoBehaviour
     public GameObject rainEffect;
     public Light directionalLight;
     public Button btnRainToggle;
+    public Image btnRainToggleImage;
+
+    //sprites
+    public Sprite sunSprite;
+    public Sprite rainSprite;
+    public Sprite stormSprite;
 
     //PRIVATE VARS
     public enum RainMode{ 
@@ -36,7 +42,7 @@ public class GameManager : MonoBehaviour
 
             //further reducing the light intensity to 1f to give the impression of heavy storms
             directionalLight.intensity = 0.8f;
-            btnRainToggle.GetComponentInChildren<TextMeshProUGUI>().text = "Stormy";
+            btnRainToggleImage.sprite = stormSprite;
 
             //enabling the wind sounds
             rainEffect.GetComponent<RainScript>().EnableWind = true;
@@ -47,8 +53,8 @@ public class GameManager : MonoBehaviour
             rainEffect.GetComponent<RainScript>().RainIntensity = 0.75f;
 
             //reducing the light intensity to give the impression of rainy day
-            directionalLight.intensity = 1.3f;
-            btnRainToggle.GetComponentInChildren<TextMeshProUGUI>().text = "Rainy";
+            directionalLight.intensity = 1.2f;
+            btnRainToggleImage.sprite = rainSprite;
 
             //disabling wind sounds
             rainEffect.GetComponent<RainScript>().EnableWind = false;
@@ -58,15 +64,15 @@ public class GameManager : MonoBehaviour
             rainEffect.GetComponent<RainScript>().RainIntensity = 0;
 
             //increasing the light intensity to give the impression of sunny day
-            directionalLight.intensity = 2.5f;
-            btnRainToggle.GetComponentInChildren<TextMeshProUGUI>().text = "Sunny";
+            directionalLight.intensity = 2f;
+            btnRainToggleImage.sprite = sunSprite;
 
             //disabling wind sounds
             rainEffect.GetComponent<RainScript>().EnableWind = false;
         }
     }
 
-    public void OnClick_BtnRainToggle(){
+    public void OnClick_btnRainToggle(){
         //cycling the values of _rain
         _rainValue += 1;
 
@@ -93,13 +99,13 @@ public class GameManager : MonoBehaviour
 
     public void OnTargetFound_ShowButton(){
         btnRainToggle.gameObject.SetActive(true);
-        rainEffect.GetComponent<RainScript>().RainIntensity = 0;
+        _rain = RainMode.Sunny;
         rainEffect.GetComponent<RainScript>().EnableWind = false;
     }
     
     public void OnTargetLost_HideButton(){
         btnRainToggle.gameObject.SetActive(false);
-        rainEffect.GetComponent<RainScript>().RainIntensity = 0;
+        _rain = RainMode.Sunny;
         rainEffect.GetComponent<RainScript>().EnableWind = false;
     }
 }
