@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
             rainEffect.GetComponent<RainScript>().RainIntensity = 0;
 
             //increasing the light intensity to give the impression of sunny day
-            directionalLight.intensity = 2f;
+            directionalLight.intensity = 1.7f;
             btnRainToggleImage.sprite = sunSprite;
 
             //disabling wind sounds
